@@ -13,4 +13,5 @@ This is an e-commerce project. Currently under construction.
 ### Authors
 
 Suat Bayrak [sbayrak](https://github.com/sbayrak)
+<br />
 Eray Hacıoğlu [erayhacioglu](https://github.com/erayhacioglu)
