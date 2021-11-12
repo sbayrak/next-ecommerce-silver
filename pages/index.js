@@ -1,9 +1,11 @@
+import Carousel from '../components/reuseable/Carousel';
+
 const Home = () => {
-	return (
-		<div className='container mt-5'>
-			<h1 className='text-center'>Hello Next!!!</h1>
-		</div>
-	);
+  return (
+    <div>
+      <Carousel></Carousel>
+    </div>
+  );
 };
 
 export default Home;
