@@ -1,0 +1,17 @@
+.carousel {
+  height: calc(100vh - 100px);
+  @media (max-width: 600px) {
+    height: calc(100vh - 350px);
+  }
+}
+
+.carousel-item2,
+.carousel-link {
+  height: 100% !important;
+  width: 100%;
+}
+
+.carousel-inner {
+  position: relative;
+  height: 100%;
+}
