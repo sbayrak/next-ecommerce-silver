@@ -64,12 +64,12 @@ const Header = () => {
 									}}
 								>
 									<li className='auth-dropdown-list'>
-										<Link href='/'>
+										<Link href='/giris'>
 											<a className='auth-dropdown-link'>Giriş Yap</a>
 										</Link>
 									</li>
 									<li className='auth-dropdown-list'>
-										<Link href='/'>
+										<Link href='/kayit'>
 											<a className='auth-dropdown-link'>Kayıt Ol</a>
 										</Link>
 									</li>
