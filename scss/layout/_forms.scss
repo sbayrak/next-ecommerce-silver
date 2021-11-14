@@ -1,0 +1,81 @@
+/*Form*/
+.form-wrapper {
+	width: 90%;
+	max-width: 475px;
+	background: #fff;
+	border-radius: 5px;
+	padding: 40px 30px;
+	margin: 30px auto 0 auto;
+	box-shadow: 0 20px 60px -45px #f55951;
+	.form {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		.form-title {
+			@include text($fs-lg-1, 500, $primary-color);
+			text-align: center;
+			margin-bottom: 20px;
+		}
+		.form-alert {
+			@include text($fs-md-1, 500, crimson);
+			margin: 5px 0;
+		}
+		.form-field {
+			width: 100%;
+			margin-bottom: 10px;
+			display: flex;
+			flex-direction: column;
+			&:last-child {
+				margin-bottom: 0;
+			}
+			.form-label {
+				@include text($fs-md-1, 500, $text-color);
+				margin-bottom: 5px;
+			}
+			.form-input {
+				width: 100%;
+				height: 40px;
+				padding: 10px;
+				border: 2px solid $third-color;
+				border-radius: 4px;
+			}
+			.show-password {
+				position: absolute;
+				right: 10px;
+				top: 50%;
+				transform: translateY(-50%);
+				cursor: pointer;
+			}
+			.form-btn {
+				width: 100%;
+				padding: 12px;
+				border-radius: 4px;
+				background: $primary-color;
+				@include text($fs-md-1, 500, $grey-color);
+				transition: 300ms;
+				margin-top: 15px;
+				&:hover {
+					opacity: 0.85;
+					transform: translateY(-5px);
+				}
+			}
+		}
+		.form-info {
+			margin: 2px 0;
+			text-align: right;
+			@include text($fs-md-1, 500, $text-color);
+		}
+		.form-text {
+			margin-top: 10px;
+			text-align: center;
+			@include text($fs-md-1, 500, $text-color);
+			.form-text-link {
+				color: $primary-color;
+			}
+			.form-reset-link {
+				color: $text-color;
+			}
+		}
+	}
+}
