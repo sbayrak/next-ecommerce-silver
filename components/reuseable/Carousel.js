@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import staticImg from '../../public/compressed.jpg';
 
 const Carousel = () => {
   return (
@@ -12,34 +14,58 @@ const Carousel = () => {
           className='carousel-item active carousel-item2 '
           data-bs-interval='30000'
         >
-          <a href='#!' className='carousel-link'>
-            <Image
-              src='/compressed.jpg'
-              className='d-block w-100  '
-              alt='asd'
-              layout='fill'
-            />
-          </a>
+          {/* <div href='#!' className='carousel-link'>
+             
+          </div> */}
+          <Link href='#!'>
+            <a className='carousel-link'>
+              <div className='carousel-img-wrapper'>
+                <Image
+                  src={staticImg}
+                  layout='fill'
+                  objectFit='cover'
+                  className='d-block w-100 carousel-img'
+                  alt='asd'
+                />
+              </div>
+            </a>
+          </Link>
         </div>
         <div className='carousel-item carousel-item2' data-bs-interval='3000'>
-          <a href='#!' className='carousel-link'>
-            <Image
-              src='/compressed.jpg'
-              className='d-block w-100   '
-              alt='asd'
-              layout='fill'
-            />
-          </a>
+          {/* <div href='#!' className='carousel-link'>
+           
+          </div> */}
+          <Link href='#!'>
+            <a className='carousel-link'>
+              <div className='carousel-img-wrapper'>
+                <Image
+                  src={staticImg}
+                  layout='fill'
+                  objectFit='cover'
+                  className='d-block w-100 carousel-img'
+                  alt='asd'
+                />
+              </div>
+            </a>
+          </Link>
         </div>
         <div className='carousel-item carousel-item2' data-bs-interval='3000'>
-          <a href='#!' className='carousel-link'>
-            <Image
-              src='/compressed.jpg'
-              className='d-block w-100   '
-              alt='asd'
-              layout='fill'
-            />
-          </a>
+          {/* <div href='#!' className='carousel-link'>
+            
+          </div> */}
+          <Link href='#!'>
+            <a className='carousel-link'>
+              <div className='carousel-img-wrapper'>
+                <Image
+                  src={staticImg}
+                  layout='fill'
+                  objectFit='cover'
+                  className='d-block w-100 carousel-img'
+                  alt='asd'
+                />
+              </div>
+            </a>
+          </Link>
         </div>
       </div>
       <button
