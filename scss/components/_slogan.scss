@@ -1,0 +1,72 @@
+/*Slogan*/
+.slogan-wrapper {
+	width: 100%;
+	padding: 20px 0;
+	background: #fff;
+	.slogan {
+		width: 100%;
+		height: 100%;
+		@include grid(3, 1fr);
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		.slogan-card {
+			display: flex;
+			align-items: center;
+			.slogan-card-icon-container {
+				width: 80px;
+				height: 80px;
+				border-radius: 50%;
+				padding: 15px;
+				background: $third-color;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-right: 5px;
+				i {
+					font-size: 1.8rem;
+					color: $primary-color;
+				}
+			}
+			.slogan-card-text {
+				display: flex;
+				flex-direction: column;
+				.slogan-card-title {
+					@include text(1.1rem, 500, $text-color);
+				}
+				.slogan-card-content {
+					@include text(0.75rem, 500, $label-color);
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.slogan-wrapper {
+		padding: 0;
+	}
+	.slogan-wrapper .slogan {
+		display: flex;
+	}
+	.slogan-wrapper .slogan .slogan-card {
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		padding-top: 10px;
+		.slogan-card-icon-container {
+			margin-bottom: 10px;
+			width: 60px;
+			height: 60px;
+		}
+		.slogan-card-text {
+			.slogan-card-title {
+				font-size: 0.9rem;
+			}
+			.slogan-card-content {
+				font-size: 0.7rem;
+			}
+		}
+	}
+}

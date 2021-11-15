@@ -1,0 +1,53 @@
+/*Featured*/
+.featured-wrapper {
+	width: 100%;
+	padding: 25px 0;
+	.featured {
+		width: 100%;
+		height: 100%;
+		@include grid(4, 20px);
+		.featured-card {
+			position: relative;
+			height: 180px;
+			border: 1px solid $third-color;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			overflow: hidden;
+			border-radius: 5px;
+			&:hover .featured-card-img {
+				transform: scale(1.2);
+			}
+			.featured-card-img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				z-index: 1;
+				transition: 300ms;
+			}
+			.featured-card-text {
+				position: absolute;
+				background: $third-color;
+				padding: 10px 20px;
+				text-align: center;
+				z-index: 2;
+				border-radius: 4px;
+				.featured-card-link {
+					@include text($fs-md-1, 500, $primary-color);
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 992px) {
+	.featured-wrapper .featured {
+		@include grid(2, 1fr);
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.featured-wrapper .featured {
+		@include grid(1, 1fr);
+	}
+}
