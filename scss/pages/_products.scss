@@ -1,0 +1,161 @@
+/*Products*/
+.products-wrapper {
+	width: 100%;
+	padding: 25px;
+	.product-page-header {
+		width: 100%;
+		padding: 20px 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.product-page-title {
+			@include text(1.5rem, 600, $text-color);
+		}
+		.product-page-select {
+			position: relative;
+			display: flex;
+			width: 200px;
+			height: 35px;
+			line-height: 35px;
+			background: $secondary-color;
+			overflow: hidden;
+			border-radius: 0.25em;
+			.filter-select {
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				-ms-appearance: none;
+				appearance: none;
+				outline: 0;
+				box-shadow: none;
+				border: 0 !important;
+				background: $text-color;
+				background-image: none;
+				flex: 1;
+				padding: 0 0.5em;
+				color: #fff;
+				cursor: pointer;
+				font-size: 1em;
+			}
+			&::after {
+				content: '\25BC';
+				position: absolute;
+				top: 0;
+				right: 0;
+				padding: 0 1em;
+				background: $text-color;
+				color: #fff;
+				cursor: pointer;
+				pointer-events: none;
+				transition: 0.25s all ease;
+			}
+		}
+	}
+	.products {
+		@include grid(4, 1fr);
+		gap: 20px;
+		.product {
+			height: 350px;
+			background: $grey-color;
+			border-radius: 5px;
+			transition: 300ms;
+			padding-bottom: 7px;
+			&:hover {
+				box-shadow: 25px 50px 50px -45px #f55951;
+			}
+			.product-photo {
+				width: 100%;
+				height: 200px;
+				position: relative;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+				background: #eee;
+				.product-img {
+					max-width: 100%;
+					max-height: 100%;
+					object-fit: contain;
+				}
+			}
+			.product-content {
+				width: 100%;
+				padding: 10px;
+				height: 90px;
+				.product-title {
+					@include text(1.2rem, 500, $text-color);
+				}
+				.product-prices {
+					display: flex;
+					.product-price-old {
+						margin-right: 7px;
+						@include text(1rem, 500, $label-color);
+						text-decoration: line-through;
+					}
+					.product-price {
+						@include text(1rem, 500, $text-color);
+					}
+				}
+			}
+			.product-footer {
+				width: 100%;
+				padding: 5px 10px;
+				height: 50px;
+				.product-btn {
+					width: 100%;
+					padding: 10px;
+					background: $primary-color;
+					@include text($fs-md-1, 500, $grey-color);
+					transition: 300ms;
+					border-radius: 4px;
+					&:hover {
+						opacity: 0.85;
+					}
+				}
+			}
+		}
+	}
+	.page-container {
+		width: auto;
+		height: 40px;
+		margin-top: 20px;
+		display: flex;
+		align-items: center;
+		.page {
+			width: 35px;
+			height: 35px;
+			border: 1px solid $primary-color;
+			@include text(1rem, 500, $text-color);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: #fff;
+			transition: 300ms;
+			&.active {
+				background: $primary-color;
+				color: #fff;
+			}
+			&:hover {
+				background: $primary-color;
+				color: #fff;
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.products-wrapper .products {
+		@include grid(3, 1fr);
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.products-wrapper .products {
+		@include grid(2, 1fr);
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.products-wrapper .products {
+		@include grid(1, 1fr);
+	}
+}

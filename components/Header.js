@@ -15,11 +15,15 @@ const Header = () => {
 				<div className='container'>
 					<div className='navbar'>
 						<div className='logo'>
-							<img
-								src='https://www.kap.org.tr/SirketLogo/4028e4a14158e41e01415b41210a6e8c'
-								alt=''
-								className='logo-img'
-							/>
+							<Link href='/'>
+								<a>
+									<img
+										src='https://www.kap.org.tr/SirketLogo/4028e4a14158e41e01415b41210a6e8c'
+										alt=''
+										className='logo-img'
+									/>
+								</a>
+							</Link>
 						</div>
 						<div
 							className='menu'
