@@ -34,9 +34,13 @@
 				flex-direction: column;
 				.slogan-card-title {
 					@include text(1.1rem, 500, $text-color);
+					margin: 0 0 10px 0;
+					padding: 0;
 				}
 				.slogan-card-content {
 					@include text(0.75rem, 500, $label-color);
+					margin: 0;
+					padding: 0;
 				}
 			}
 		}
@@ -44,9 +48,6 @@
 }
 
 @media screen and (max-width: 768px) {
-	.slogan-wrapper {
-		padding: 0;
-	}
 	.slogan-wrapper .slogan {
 		display: flex;
 	}
