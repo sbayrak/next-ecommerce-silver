@@ -1,47 +1,45 @@
+@use '../abstracts/mixins';
+@use '../abstracts/variables';
+
 .carousel {
-  height: calc(100vh - 200px);
+  // height: calc(100vh - 200px);
+  height: 100%;
 }
 
 .carousel-item2 {
   height: 100% !important;
   width: 100%;
+  position: relative;
 }
 
-.carousel-inner {
-  height: 100%;
-}
 .carousel-link {
   max-width: 100%;
   height: auto;
-  // background-image: url('../../public/compressed.jpg');
-  // background-size: cover;
-  // background-position: center;
 }
 
 .carousel-img-wrapper {
   width: 100%;
-  height: 700px;
-}
-.carousel-img {
-  max-width: 100%;
   height: auto;
 }
 
 @media only screen and (max-device-width: 768px) {
-  .carousel-link {
-    height: 500px;
+  .carousel {
+    height: 100%;
+  }
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    background-size: 75% 75%;
   }
 }
-@media only screen and (max-device-width: 475px) {
+@media only screen and (max-device-width: 500px) {
+  .carousel {
+    height: 100%;
+  }
   .carousel-item2 {
-    height: 60% !important;
     width: 100%;
   }
-  .carousel-img-wrapper {
-    height: 300px;
-  }
-  .carousel-control-prev,
-  .carousel-control-next {
-    height: 60%;
+  .carousel-control-next-icon,
+  .carousel-control-prev-icon {
+    background-size: 50% 50%;
   }
 }
