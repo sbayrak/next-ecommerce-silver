@@ -49,7 +49,7 @@ const Header = () => {
 						</div>
 						<div className='navbar-right'>
 							<div className='cart-container'>
-								<Link href='/'>
+								<Link href='/sepetim'>
 									<a>
 										<i className='fas fa-shopping-cart' />
 										<span className='cart-counter'>0</span>
