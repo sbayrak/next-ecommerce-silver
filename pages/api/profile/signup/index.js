@@ -14,15 +14,25 @@ export default async (req, res) => {
   // ROUTE          :       /api/profile/signup/
   if (req.method === 'POST') {
     try {
-      let mailFields = {};
-      mailFields.email = req.body.email;
-      mailFields.password = req.body.password;
-      mailFields.token = uuidv4();
+      // @@@@ CHECK IF USER EXITS @@@@
+      let isUserExists = await User.findOne({ email: req.body.email });
 
-      await VerificationRequest.create(mailFields);
-      sendMail(mailFields.email, 'EcommerceSilver', mailFields.token);
+      if (isUserExists) {
+        res.status(200).json({ success: false, msg: 'userexists', user: null });
+      } else if (!isUserExists) {
+        let mailFields = {};
+        mailFields.email = req.body.email;
+        mailFields.token = uuidv4();
 
-      res.status(200).json({ success: true });
+        // @@@@@ GENERATE SALT AND HASH THE PASSWORD
+        const salt = await bcrypt.genSalt(10);
+        mailFields.password = await bcrypt.hash(req.body.password, salt);
+        // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+        await VerificationRequest.create(mailFields);
+        sendMail(mailFields.email, 'EcommerceSilver', mailFields.token);
+
+        res.status(200).json({ success: true });
+      }
     } catch (error) {
       res.status(400).json({ success: false });
     }
@@ -52,31 +62,6 @@ export default async (req, res) => {
     //   res.status(201).json(newVerificationRequest.ops);
     // }
   } else if (req.method === 'GET') {
-    const { firstname, lastname, email, token } = req.query;
-    const salt = await bcrypt.genSalt();
-
-    const compareVerificationRequest = await db
-      .collection('verificationRequests')
-      .findOne({ email, token });
-
-    if (!compareVerificationRequest) {
-      res.status(201).json({ msg: false });
-    } else if (compareVerificationRequest) {
-      res.status(201).json({ msg: true });
-
-      const hashedPassword = await bcrypt.hash(
-        compareVerificationRequest.password,
-        salt
-      );
-      await db.collection('verificationRequests').deleteOne({ email, token });
-      const user = await db.collection('users').insertOne({
-        firstname: firstname,
-        lastname: lastname,
-        email: email,
-        password: hashedPassword,
-        madeAt: compareVerificationRequest.madeAt,
-      });
-      const newUser = await JSON.parse(user);
-    }
+    res.status(200).json({ msg: '/signup/get method' });
   }
 };

@@ -43,7 +43,7 @@ style="
 Üyeliğinizi aktive etmek için linke tıklayın.
 </p>
 <a
-href="${process.env.NEXT_PUBLIC_URL}/giris?token=${token}"
+href="${process.env.NEXT_PUBLIC_URL}/giris?verification=${token}"
 style="
     background: #f55951;
     color: #fff;
