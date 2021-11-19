@@ -7,7 +7,7 @@ const VerificationRequestSchema = new mongoose.Schema({
   password: {
     type: 'String',
   },
-  token: {
+  verification: {
     type: 'String',
   },
   isVerified: {
@@ -17,4 +17,4 @@ const VerificationRequestSchema = new mongoose.Schema({
 });
 
 export default mongoose.models.VerificationRequest ||
-  mongoose.model('verificationRequest', VerificationRequestSchema);
+  mongoose.model('VerificationRequest', VerificationRequestSchema);

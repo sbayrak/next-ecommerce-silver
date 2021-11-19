@@ -36,32 +36,32 @@ export default async (req, res) => {
     } catch (error) {
       res.status(400).json({ success: false });
     }
-    // const token = uuidv4();
-    // const callbackUrl = `${process.env.NEXTAUTH_URL}/auth/verification-message`;
-    // const isUserExists = await db.collection('users').findOne({ email });
+  }
+  // METHOD         :       GET
+  // DESCRIPTION    :       VERIFY VERIFICATION TOKEN AND SAVE CUSTOMER TO users COLLECTION
+  // ROUTE          :       /api/profile/signup?email=EMAIL&verification=VERIFICATION
+  else if (req.method === 'GET') {
+    try {
+      const { email, verification } = req.query;
 
-    // if (isUserExists) {
-    //   const callbackUrl = `${process.env.NEXTAUTH_URL}/auth/verification-message`;
+      const isVerificationExists = await VerificationRequest.findOne({
+        email,
+        verification,
+      });
 
-    //   res
-    //     .status(201)
-    //     .json({ msg: 'exists', callbackUrl, email: '', token: '' });
-    // } else if (!isUserExists) {
-    //   const newVerificationRequest = await db
-    //     .collection('verificationRequests')
-    //     .insertOne({
-    //       firstname: firstname,
-    //       lastname: lastname,
-    //       email: email,
-    //       password: password,
-    //       token,
-    //       callbackUrl,
-    //       madeAt: date.toString(),
-    //     });
+      if (!isVerificationExists) {
+        res.status(401).json({ success: false, msg: 'verificationnotexists' });
+      } else if (isVerificationExists) {
+        let userFields = {};
+        userFields.email = isVerificationExists.email;
+        userFields.password = isVerificationExists.password;
 
-    //   res.status(201).json(newVerificationRequest.ops);
-    // }
-  } else if (req.method === 'GET') {
-    res.status(200).json({ msg: '/signup/get method' });
+        await User.create(userFields);
+        await VerificationRequest.deleteOne({ _id: isVerificationExists._id });
+        res.status(200).json({ success: true });
+      }
+    } catch (error) {
+      res.status(500).json({ success: false, msg: 'error, signup GET' });
+    }
   }
 };
