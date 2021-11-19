@@ -6,9 +6,6 @@ import dbConnect from '../../utils/dbConnect';
 export default async (req, res) => {
   await dbConnect();
   if (req.method === 'GET') {
-    const user = await User.findOne({ email: 'suat.bayrak@bilgiedu.net2' });
-    res.status(200).json({ success: true, user });
-  } else {
-    res.status(200).json({ success: false });
+    res.status(200).send({ success: false });
   }
 };
