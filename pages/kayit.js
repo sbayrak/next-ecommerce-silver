@@ -2,6 +2,26 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 import { registerSchema } from '../utils/validation';
 import Link from 'next/link';
+import { getSession } from 'next-auth/client';
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (session.user) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  } else if (!session.user) {
+    return {
+      props: {
+        session,
+      },
+    };
+  }
+};
 
 export default function Kayit() {
   const [typePass, setTypePass] = useState(false);
@@ -22,7 +42,7 @@ export default function Kayit() {
     },
     validationSchema: registerSchema,
     onSubmit: async (values) => {
-      const submitDeneme = await fetch(
+      const submitUser = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/profile/signup`,
         {
           method: 'POST',
@@ -36,7 +56,7 @@ export default function Kayit() {
         }
       );
 
-      const result = await submitDeneme.json();
+      const result = await submitUser.json();
       console.log(result);
     },
   });

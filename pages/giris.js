@@ -3,8 +3,32 @@ import { useFormik } from 'formik';
 import { loginSchema } from '../utils/validation';
 import Link from 'next/link';
 
+import { signIn } from 'next-auth/client';
+import { getSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  } else if (!session) {
+    return {
+      props: {
+        session,
+      },
+    };
+  }
+};
+
 export default function Giris() {
   const [typePass, setTypePass] = useState(false);
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -19,7 +43,21 @@ export default function Giris() {
       password: '',
     },
     validationSchema: loginSchema,
-    onSubmit: (values) => {},
+    onSubmit: (values) => {
+      signIn('credentials', {
+        redirect: false,
+        callbackUrl: `${process.env.NEXT_PUBLIC_URL}/`,
+        email: values.email,
+        password: values.password,
+      }).then(function (data) {
+        if (data.error) {
+          console.log(data);
+        } else if (data.status === 200 && data.ok === true) {
+          console.log(data);
+          router.push(`${process.env.NEXT_PUBLIC_URL}/`);
+        }
+      });
+    },
   });
 
   return (
