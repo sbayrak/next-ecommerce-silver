@@ -22,7 +22,7 @@ export default function Kayit() {
     },
     validationSchema: registerSchema,
     onSubmit: async (values) => {
-      const submitDeneme = await fetch(
+      const submitUser = await fetch(
         `${process.env.NEXT_PUBLIC_URL}/api/profile/signup`,
         {
           method: 'POST',
@@ -36,7 +36,7 @@ export default function Kayit() {
         }
       );
 
-      const result = await submitDeneme.json();
+      const result = await submitUser.json();
       console.log(result);
     },
   });
