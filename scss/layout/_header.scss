@@ -1,164 +1,170 @@
 /*Header*/
 .header {
-	position: sticky;
-	top: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	z-index: 10;
-	.header-top {
-		width: 100%;
-		height: 35px;
-		background: $primary-color;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		@include text(1rem, 500, $grey-color);
-		i {
-			margin-right: 10px;
-		}
-	}
-	.navbar-wrapper {
-		width: 100%;
-		background: $grey-color;
-		.navbar {
-			width: 100%;
-			height: 65px;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			.logo {
-				flex: 1;
-				.logo-img {
-					width: auto;
-					height: 50px;
-					object-fit: contain;
-				}
-			}
-			.menu {
-				flex: 3;
-				display: flex;
-				justify-content: space-evenly;
-				.menu-link {
-					@include text($fs-md-1, 500, $text-color);
-					transition: 300ms;
-					&:hover {
-						color: $label-color;
-					}
-				}
-			}
-			.navbar-right {
-				flex: 1;
-				display: flex;
-				align-items: center;
-				justify-content: flex-end;
-				.cart-container {
-					position: relative;
-					margin-right: 25px;
-					a {
-						color: $text-color;
-						transition: 300ms;
-						&:hover {
-							color: $label-color;
-						}
-						.fa-shopping-cart {
-							font-size: $fs-md-2;
-						}
-						.cart-counter {
-							position: absolute;
-							top: -10px;
-							right: -10px;
-							width: 20px;
-							height: 20px;
-							border-radius: 50%;
-							background: $primary-color;
-							text-align: center;
-							@include text(14px, 400, $grey-color);
-						}
-					}
-				}
-				.auth-dropdown {
-					position: relative;
-					cursor: pointer;
-					.fa-user {
-						font-size: $fs-md-2;
-						transition: 300ms;
-						&:hover {
-							color: $label-color;
-						}
-					}
-					.auth-dropdown-menu {
-						position: absolute;
-						top: 100%;
-						right: 0;
-						width: 150px;
-						background: white;
-						padding: 15px;
-						border-radius: 4px;
-						transition: 300ms;
-						display: none;
-						z-index: 10;
-						.auth-dropdown-list {
-							width: 100%;
-							height: 35px;
-							background: $primary-color;
-							margin-bottom: 10px;
-							border-radius: 4px;
-							display: flex;
-							align-items: center;
-							justify-content: center;
-							transition: 300ms;
-							&:hover {
-								opacity: 0.85;
-							}
-							&:last-child {
-								margin: 0;
-							}
-							.auth-dropdown-link {
-								display: block;
-								@include text($fs-md-1, 500, $grey-color);
-								text-decoration: none;
-							}
-						}
-					}
-				}
-				.bar-btn {
-					margin-left: 25px;
-					display: none;
-					background: none;
-					border: none;
-					@include text(1.8rem, 600, $primary-color);
-				}
-			}
-		}
-	}
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  z-index: 10;
+  .header-top {
+    width: 100%;
+    height: 35px;
+    background: $primary-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include text(1rem, 500, $grey-color);
+    i {
+      margin-right: 10px;
+    }
+  }
+  .navbar-wrapper {
+    width: 100%;
+    background: $grey-color;
+    .navbar {
+      width: 100%;
+      height: 65px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .logo {
+        flex: 1;
+        .logo-img {
+          width: auto;
+          height: 50px;
+          object-fit: contain;
+        }
+      }
+      .menu {
+        flex: 3;
+        display: flex;
+        justify-content: space-evenly;
+        .menu-link {
+          @include text($fs-md-1, 500, $text-color);
+          transition: 300ms;
+          &:hover {
+            color: $label-color;
+          }
+        }
+      }
+      .navbar-right {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        .cart-container {
+          position: relative;
+          margin-right: 25px;
+          a {
+            color: $text-color;
+            transition: 300ms;
+            &:hover {
+              color: $label-color;
+            }
+            .fa-shopping-cart {
+              font-size: $fs-md-2;
+            }
+            .cart-counter {
+              position: absolute;
+              top: -10px;
+              right: -10px;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              background: $primary-color;
+              text-align: center;
+              @include text(14px, 400, $grey-color);
+            }
+          }
+        }
+        .auth-dropdown {
+          position: relative;
+          cursor: pointer;
+          .fa-user {
+            font-size: $fs-md-2;
+            transition: 300ms;
+            &:hover {
+              color: $label-color;
+            }
+          }
+          .auth-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 150px;
+            background: white;
+            padding: 15px;
+            border-radius: 4px;
+            transition: 300ms;
+            display: none;
+            z-index: 10;
+            .auth-dropdown-list {
+              width: 100%;
+              height: 35px;
+              background: $primary-color;
+              margin-bottom: 10px;
+              border-radius: 4px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              transition: 300ms;
+              &:hover {
+                opacity: 0.85;
+              }
+              &:last-child {
+                margin: 0;
+              }
+              .auth-dropdown-link {
+                display: block;
+                @include text($fs-md-1, 500, $grey-color);
+                text-decoration: none;
+              }
+              .auth-dropdown-btn {
+                display: block;
+                @include text($fs-md-1, 500, $grey-color);
+                outline: none;
+                border: none;
+              }
+            }
+          }
+        }
+        .bar-btn {
+          margin-left: 25px;
+          display: none;
+          background: none;
+          border: none;
+          @include text(1.8rem, 600, $primary-color);
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (max-width: 850px) {
-	.header .navbar-wrapper .navbar {
-		.menu {
-			position: fixed;
-			top: 100px;
-			left: 0;
-			width: 100%;
-			height: calc(100vh - 100px);
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: space-evenly;
-			padding: 25px;
-			background: $primary-color;
-			overflow-x: hidden;
-			overflow-y: auto;
-			transform: translateX(100%);
-			transition: 0.65s;
-			z-index: 1000;
-			.menu-link {
-				@include text($fs-md-3, 500, $grey-color);
-			}
-		}
-		.navbar-right .bar-btn {
-			display: block;
-		}
-	}
+  .header .navbar-wrapper .navbar {
+    .menu {
+      position: fixed;
+      top: 100px;
+      left: 0;
+      width: 100%;
+      height: calc(100vh - 100px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      padding: 25px;
+      background: $primary-color;
+      overflow-x: hidden;
+      overflow-y: auto;
+      transform: translateX(100%);
+      transition: 0.65s;
+      z-index: 1000;
+      .menu-link {
+        @include text($fs-md-3, 500, $grey-color);
+      }
+    }
+    .navbar-right .bar-btn {
+      display: block;
+    }
+  }
 }

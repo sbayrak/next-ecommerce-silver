@@ -12,16 +12,19 @@ const options = {
       async authorize(credentials, req) {
         let user;
 
-        const res = await fetch(`${process.env.NEXTAUTH_URL}/api/profile`, {
-          method: 'POST',
-          headers: {
-            'Content-Type:': 'application/json',
-          },
-          body: JSON.stringify(credentials),
-        });
+        const res = await fetch(
+          `${process.env.NEXTAUTH_URL}/api/profile/signin/`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(credentials),
+          }
+        );
 
         const arrayToJSON = await res.json();
-        user = arrayToJSON[0];
+        user = arrayToJSON;
 
         if (user) {
           return user;
@@ -33,8 +36,6 @@ const options = {
   ],
   pages: {
     signIn: '/giris',
-    signOut: '/auth/signout',
-    error: '/auth/error',
   },
   session: {
     jwt: true,

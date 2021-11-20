@@ -2,6 +2,26 @@ import { useState } from 'react';
 import { useFormik } from 'formik';
 import { registerSchema } from '../utils/validation';
 import Link from 'next/link';
+import { getSession } from 'next-auth/client';
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (session.user) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  } else if (!session.user) {
+    return {
+      props: {
+        session,
+      },
+    };
+  }
+};
 
 export default function Kayit() {
   const [typePass, setTypePass] = useState(false);
