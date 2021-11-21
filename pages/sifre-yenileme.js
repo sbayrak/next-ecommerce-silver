@@ -1,35 +1,10 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
-import { registerSchema } from '../utils/validation';
-import Link from 'next/link';
-import { getSession } from 'next-auth/client';
-import { useRouter } from 'next/router';
-import Spinner from '../components/reuseable/Spinner';
+import { resetPasswordSchema } from '../utils/validation';
 
-export const getServerSideProps = async (context) => {
-  const session = await getSession(context);
-
-  if (session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  } else if (!session) {
-    return {
-      props: {
-        session,
-      },
-    };
-  }
-};
-
-export default function Kayit() {
+const ResetPassword = () => {
   const [typePass, setTypePass] = useState(false);
   const [typePassConfirm, setTypePassConfirm] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
 
   const {
     handleSubmit,
@@ -40,64 +15,20 @@ export default function Kayit() {
     errors,
   } = useFormik({
     initialValues: {
-      email: '',
       password: '',
       passwordConfirm: '',
     },
-    validationSchema: registerSchema,
-    onSubmit: async (values) => {
-      setLoading(true);
-      const submitUser = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/profile/signup`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: values.email,
-            password: values.password,
-          }),
-        }
-      );
-
-      const result = await submitUser.json();
-      setLoading(false);
-      if (result.success === true) {
-        router.push(
-          `${process.env.NEXT_PUBLIC_URL}/email-verification-sent?type=email-verification`
-        );
-      }
-      // @@ TODO : IF RESULT IS false THEN DISPLAY SNACBAR
-    },
+    validationSchema: resetPasswordSchema,
+    onSubmit: (values) => {},
   });
 
   return (
     <div className='form-wrapper'>
       <form className='form' onSubmit={handleSubmit}>
-        <h2 className='form-title'>Kayıt</h2>
-        <div className='form-field'>
-          <label htmlFor='email' className='form-label'>
-            E-mail
-          </label>
-          <input
-            name='email'
-            id='email'
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            className='form-input'
-            style={{
-              borderColor: `${errors.email && touched.email ? '#f55951' : ''}`,
-            }}
-          />
-        </div>
-        {errors.email && touched.email && (
-          <div className='form-alert'>{errors.email}</div>
-        )}
+        <h2 className='form-title'>Şifre Yenileme</h2>
         <div className='form-field'>
           <label htmlFor='password' className='form-label'>
-            Şifre
+            Yeni Şifre
           </label>
           <div className='position-relative'>
             <input
@@ -131,7 +62,7 @@ export default function Kayit() {
         )}
         <div className='form-field'>
           <label htmlFor='passwordConfirm' className='form-label'>
-            Şifre Tekrar
+            Yeni Şifre Tekrar
           </label>
           <div className='position-relative'>
             <input
@@ -166,17 +97,11 @@ export default function Kayit() {
           <div className='form-alert'>{errors.passwordConfirm}</div>
         )}
         <div className='form-field'>
-          <button className='form-btn'>
-            {loading ? <Spinner></Spinner> : 'Kayıt Ol'}
-          </button>
-        </div>
-        <div className='form-text'>
-          Üye misin?{' '}
-          <Link href='/giris'>
-            <a className='form-text-link'>Giriş Yap</a>
-          </Link>
+          <button className='form-btn'>Kaydet</button>
         </div>
       </form>
     </div>
   );
-}
+};
+
+export default ResetPassword;
