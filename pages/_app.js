@@ -6,7 +6,7 @@ import { Provider } from 'next-auth/client';
 function MyApp({ Component, pageProps }) {
   return (
     <Layout>
-      <Provider>
+      <Provider session={pageProps.session}>
         <Script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'></Script>
         <Component {...pageProps} />{' '}
       </Provider>

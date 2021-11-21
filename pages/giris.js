@@ -51,9 +51,7 @@ export default function Giris() {
         password: values.password,
       }).then(function (data) {
         if (data.error) {
-          console.log(data);
         } else if (data.status === 200 && data.ok === true) {
-          console.log(data);
           router.push(`${process.env.NEXT_PUBLIC_URL}/`);
         }
       });

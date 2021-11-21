@@ -3,18 +3,19 @@ import { useFormik } from 'formik';
 import { registerSchema } from '../utils/validation';
 import Link from 'next/link';
 import { getSession } from 'next-auth/client';
+import { useRouter } from 'next/router';
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
 
-  if (session.user) {
+  if (session) {
     return {
       redirect: {
         destination: '/',
         permanent: false,
       },
     };
-  } else if (!session.user) {
+  } else if (!session) {
     return {
       props: {
         session,
@@ -26,6 +27,7 @@ export const getServerSideProps = async (context) => {
 export default function Kayit() {
   const [typePass, setTypePass] = useState(false);
   const [typePassConfirm, setTypePassConfirm] = useState(false);
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -57,7 +59,11 @@ export default function Kayit() {
       );
 
       const result = await submitUser.json();
-      console.log(result);
+      if (result.success === true) {
+        router.push(
+          `${process.env.NEXT_PUBLIC_URL}/email-verification-sent?email=${values.email}`
+        );
+      }
     },
   });
 
