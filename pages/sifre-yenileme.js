@@ -1,10 +1,42 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
 import { resetPasswordSchema } from '../utils/validation';
+import { useRouter } from 'next/router';
+import Spinner from '../components/reuseable/Spinner';
+import { getSession } from 'next-auth/client';
 
-const ResetPassword = () => {
+export const getServerSideProps = async (context) => {
+  const session = await getSession(context);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+  if (context.query.email && context.query.verification) {
+    let email = context.query.email;
+    let verification = context.query.verification;
+    return {
+      props: {
+        email,
+        verification,
+      },
+    };
+  } else {
+    return {
+      props: {},
+    };
+  }
+};
+
+const ResetPassword = ({ email, verification }) => {
   const [typePass, setTypePass] = useState(false);
   const [typePassConfirm, setTypePassConfirm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const {
     handleSubmit,
@@ -19,7 +51,27 @@ const ResetPassword = () => {
       passwordConfirm: '',
     },
     validationSchema: resetPasswordSchema,
-    onSubmit: (values) => {},
+    onSubmit: async (values) => {
+      setLoading(true);
+      const submitNewPassword = await fetch(
+        `${process.env.NEXT_PUBLIC_URL}/api/profile/password-reset?email=${email}&verification=${verification}`,
+        {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ password: values.password }),
+        }
+      );
+
+      const result = await submitNewPassword.json();
+      setLoading(false);
+      console.log(result);
+      if (result.success === true) {
+        // @@ TODO : DISPLAY TOAST
+        router.push(`${process.env.NEXT_PUBLIC_URL}/giris`);
+      }
+    },
   });
 
   return (
@@ -97,7 +149,9 @@ const ResetPassword = () => {
           <div className='form-alert'>{errors.passwordConfirm}</div>
         )}
         <div className='form-field'>
-          <button className='form-btn'>Kaydet</button>
+          <button className='form-btn'>
+            {loading ? <Spinner></Spinner> : 'Kaydet'}
+          </button>
         </div>
       </form>
     </div>
