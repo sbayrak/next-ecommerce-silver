@@ -33,7 +33,6 @@ export const getServerSideProps = async (context) => {
 };
 
 const VerifyEmail = ({ result }) => {
-  console.log(result);
   const successWrapper = (
     <div className='verify'>
       <div className='verify-img'>
