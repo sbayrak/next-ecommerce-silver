@@ -26,7 +26,7 @@ const options = {
         const arrayToJSON = await res.json();
         user = arrayToJSON;
 
-        if (user) {
+        if (user.email) {
           return user;
         } else {
           return null;

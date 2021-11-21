@@ -5,12 +5,12 @@ import { Provider } from 'next-auth/client';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
-      <Provider session={pageProps.session}>
+    <Provider session={pageProps.session}>
+      <Layout>
         <Script src='https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js'></Script>
         <Component {...pageProps} />{' '}
-      </Provider>
-    </Layout>
+      </Layout>{' '}
+    </Provider>
   );
 }
 

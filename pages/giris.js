@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { signIn } from 'next-auth/client';
 import { getSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
+import Spinner from '../components/reuseable/Spinner';
 
 export const getServerSideProps = async (context) => {
   const session = await getSession(context);
@@ -28,6 +29,7 @@ export const getServerSideProps = async (context) => {
 
 export default function Giris() {
   const [typePass, setTypePass] = useState(false);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const {
@@ -44,13 +46,16 @@ export default function Giris() {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
+      setLoading(true);
       signIn('credentials', {
         redirect: false,
         callbackUrl: `${process.env.NEXT_PUBLIC_URL}/`,
         email: values.email,
         password: values.password,
       }).then(function (data) {
+        setLoading(false);
         if (data.error) {
+          // @@ TODO : IF RESULT IS false THEN DISPLAY SNACBAR
         } else if (data.status === 200 && data.ok === true) {
           router.push(`${process.env.NEXT_PUBLIC_URL}/`);
         }
@@ -115,11 +120,13 @@ export default function Giris() {
         {errors.password && touched.password && (
           <div className='form-alert'>{errors.password}</div>
         )}
-        <Link href='/sifremiunuttum'>
+        <Link href='/sifremi-unuttum'>
           <a className='form-info'>Şifremi Unuttum?</a>
         </Link>
         <div className='form-field'>
-          <button className='form-btn'>Giriş Yap</button>
+          <button className='form-btn'>
+            {loading ? <Spinner></Spinner> : 'Giriş Yap'}
+          </button>
         </div>
         <div className='form-text'>
           Üye değil misin?{' '}
